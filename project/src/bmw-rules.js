@@ -207,7 +207,7 @@ export function generateECUUnlockInfo(required = true) {
     required: true,
     fromDate: '2020-06-01',
     extraCost: null,
-    note: 'Alle BMW\'s met productiedatum ná 06/2020 hebben anti-tuning protection (MG1/MD1). ECU unlock vereist voor chiptuning. Neem contact op voor meer informatie.'
+    note: 'All BMWs manufactured after 06/2020 have anti-tuning protection (MG1/MD1). An ECU unlock is required for chip tuning. Contact us for more information..'
   };
 }
 
