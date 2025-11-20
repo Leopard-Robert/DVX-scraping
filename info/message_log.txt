@@ -1,0 +1,317 @@
+
+
+
+
+
+Tuning
+
+
+
+Full-Stack Developer (React + Node + Scraper) for Automotive Tuning Calculator & Admin Panel
+Posted yesterday
+Worldwide
+
+Summary
+Seeking a skilled full stack developer to complete a tuning calculator and admin system for Supreme Tuning. The project involves enhancing an existing starter codebase using React and Node/Express, implementing a DVX data scraper, and ensuring seamless integration of business rules.
+
+Deliverables
+1. Backend (Node/Express)
+REST API endpoints:
+/brands, /models, /engines, /stages, /power
+JSON database: supreme-tuning-master.json
+Admin endpoints: /data and /save (with authentication)
+Automatic JSON backup system
+2. DVX Scraper
+Puppeteer script that scrapes Stage 1/Stage 2 data
+Covers all German brands + Lamborghini/Bentley/Aston
+Generates:
+Stage 1
+Stage 1+
+Stage 2
+Stage 2+
+Applies required rules:
+BMW built after june 2020 → ECU unlock required
+AMG M177/M178 V8 ≥2018 → CPC upgrade required
+3. Frontend
+Fully working public calculator
+Fully working admin editor
+React/Vite setup complete
+Data updates in admin reflect instantly in calculator
+4. Deployment
+Working on staging or production URL
+Calculator and admin both tested end-to-end
+$1,000.00
+
+Fixed-price
+Expert
+I am willing to pay higher rates for the most experienced freelancers
+Attachment
+supreme_tuning_upwork_package.zip (11 KB)
+Project Type:Ongoing project
+You will be asked to answer the following questions when submitting a proposal:
+
+Describe step-by-step how you would scrape a multi-step wizard (brand→model→type→engine) with Puppeteer on dvxperformance.com, and what challenges (selectors, waits, navigation, table parsing, anti-bot) you expect.
+Explain how you would structure a JSON database for brands → models → engines → stages, and how you'd link them (IDs/relationships).
+How would you secure the admin panel and the /save endpoint? Describe the method briefly.
+In this project, what is the difference between Stage 1, Stage 1+, Stage 2, and Stage 2+? How should these be generated?
+How would you implement the BMW (june/2020 ECU unlock) and AMG (M177/M178 ≥2018 CPC upgrade) rules in code?
+
+
+
+-----------------------------------
+----------------------------------
+
+1. DVX Scraper + JSON Data Generation (Fast Delivery) — 30%
+Due
+Nov 24, 2025
+Amount
+$250.00
+2. Backend API + Admin Panel Integration — 40%
+Due
+Dec 3, 2025
+Amount
+$300.00
+3. Public Calculator + Final Deployment (Staging/Production) — 30%
+Due
+Dec 8, 2025
+Amount
+$250.00
+Total price of project
+This includes all milestones, and is the amount your client will see.
+$800.00
+
+
+Cover letter
+Hi,
+I can deliver your entire Supreme Tuning project very quickly, while ensuring the system is highly reliable, fully scalable, and easy to maintain long-term. I’ve reviewed all attached developer files and can implement the DVX Puppeteer scraper, Node/Express API, JSON save/backup system, and the full React calculator/admin exactly as specified, including Stage 1/2 + Stage 1+/2+ generation and the BMW/AMG business rules. I’m ready to start immediately and deploy a clean, stable, production-ready solution.
+
+Describe step-by-step how you would scrape a multi-step wizard (brand→model→type→engine) with Puppeteer on dvxperformance.com, and what challenges (selectors, waits, navigation, table parsing, anti-bot) you expect.
+The DVX configurator is a sequential, state-dependent wizard, so the scraper needs to follow the same order a real user would. With Puppeteer, I would load the page, retrieve the list of brands, and iterate through each brand, selecting it and waiting for the next panel (models) to fully refresh before proceeding. The same pattern applies to models, types, and engine variants.
+
+Once the engine is selected, DVX renders the tuning table dynamically. Instead of relying on positional indexes, I would read rows by their labels (“Origineel/Stock”, “Stage 1”, “Stage 2”), which is more robust because DVX occasionally adjusts table formats. Proper DOM-based waits, response listeners, and interaction delays prevent state desynchronization and avoid triggering anti-bot behavior. The result is a stable, repeatable scrape across all supported brands. less
+Explain how you would structure a JSON database for brands → models → engines → stages, and how you'd link them (IDs/relationships).
+For maintainability and clean integration with the admin panel, the most scalable approach is a flat JSON schema with relational links via IDs. Each entity type lives in its own array:
+
+brands: { id, name }
+
+models: { id, brandId, name }
+
+engines: { id, modelId, name, code, yearFrom, yearTo }
+
+stages: { id, engineId, stageName, stockHp, tunedHp, stockNm, tunedNm, ecuUnlock, cpcUpgrade }
+
+This structure keeps the file human-readable, easy to diff, and simple to update through the admin. It also aligns perfectly with frontend consumption: brand → model → engine → stage can be resolved efficiently and without deeply nested objects, which reduces complexity over time. less
+How would you secure the admin panel and the /save endpoint? Describe the method briefly.
+Security can be kept lean while still being robust. I would implement an authentication layer using a hashed admin password (bcrypt) and a short-lived JWT issued on login. All admin-related routes, including /data and /save, would pass through a token-validation middleware.
+
+On top of that, enforcing HTTPS, adding minimal rate-limiting on write operations, and generating automatic JSON backups ensures that the data cannot be tampered with and that any accidental edits can be recovered easily. This provides strong security without introducing unnecessary overhead. less
+In this project, what is the difference between Stage 1, Stage 1+, Stage 2, and Stage 2+? How should these be generated?
+DVX only publishes Stage 1 and Stage 2 values in its tuning tables. These are extracted directly from the website during scraping. Stage 1+ and Stage 2+ are simply extended variants created during the import step. Initially, they are copies of Stage 1 and Stage 2, which allows the team to adjust them later within the admin interface if needed.
+
+This approach keeps the dataset complete while maintaining flexibility and ensuring a consistent workflow between scraped data and editable values. less
+How would you implement the BMW (june/2020 ECU unlock) and AMG (M177/M178 ≥2018 CPC upgrade) rules in code?
+BMW rule
+Any BMW produced after June 2020 requires an ECU unlock. During stage generation, I check the engine’s production date; if it exceeds 06/2020, I attach an ecuUnlock flag and the corresponding note.
+
+AMG rule
+For Mercedes-AMG, the M177 and M178 V8 engines from model year 2018 onward require a CPC upgrade. When an engine meets this criteria, the cpcUpgrade requirement is added automatically.
+
+These rules can be applied either during scraping or on the backend’s /power response generation. Centralizing them in one place ensures consistency and makes maintenance straightforward. less
+
+
+
+
+------------------------------------------
+Serhii Dzyhanovskyi
+12:41 AM
+Hi,
+I can deliver your entire Supreme Tuning project very quickly, while ensuring the system is highly reliable, fully scalable, and easy to maintain long-term. I’ve reviewed all attached developer files and can implement the DVX Puppeteer scraper, Node/Express API, JSON save/backup system, and the full React calculator/admin exactly as specified, including Stage 1/2 + Stage 1+/2+ generation and the BMW/AMG business rules. I’m ready to start immediately and deploy a clean, stable, production-ready solution.
+
+View details
+
+
+---------------------------------------
+BK
+Beau K
+12:41 AM
+Hi, thanks for the great answers — one important follow-up:
+
+For BMW, the MG1/MD1 ECU lock does NOT follow the model generation year.
+Example:
+G20 3-series = 2019–2024
+But MG1 lock applies only after June 2020
+F40 1-series = 2018–2024
+Also locked after 2020 even though model exists earlier
+DVX does not always provide production year data.
+
+- How exactly would you detect whether a DVX engine entry should trigger the >06/2020 BMW ECU unlock rule?
+
+Please include:
+1. How you would extract or infer engine codes (B48/B58/B47/B57/S58 etc.)
+2. What you do when DVX doesn’t show production years
+3. Whether you use internal engine-code → lock-date mapping
+4. How you would implement the fallback rule
+5. A short pseudo-code example
+
+Kind Regards,
+
+Beau
+Owner Supreme Tuning NL
+
+
+---------------------------------------
+Serhii Dzyhanovskyi
+2:21 PM
+Thank you for getting back to me.
+Below are my answers to your questions, explained as clearly and professionally as possible.
+
+
+
+1. How would you extract or infer engine codes
+
+My first step is to look for an explicit engine code inside the DVX engine label. DVX often includes the code directly (e.g., B48, B58, B47, B57, S58), so a simple parser using a regex/tokenizer is usually enough to extract it reliably.
+
+If DVX doesn’t provide a clean code, I fall back to deterministic BMW mapping rules: the combination of model, displacement, and fuel type uniquely identifies the engine on modern BMW platforms. For example, a G20 330i is always a B48, an M340i is always a B58TU, and a 118d/120d is always a B47. BMW’s model structure is consistent enough that this inference is extremely dependable.
+
+2. What you do when DVX doesn’t show production years
+
+DVX production years aren’t accurate or consistent enough to use for MG1/MD1 classification. And since BMW’s ECU lock rollout didn’t follow model years anyway, the DVX year fields wouldn’t help even if they were present.
+
+Instead, I rely on known BMW platform information (G-series and late F-series) combined with internal data on when MG1/MD1 lock protection became mandatory. This approach is more reliable and aligns with BMW’s actual ECU transition timeline.
+
+3. Whether you use an internal engine-code → lock-date mapping
+
+Yes, I maintain a small internal reference table so the logic stays consistent and easy to update. Each BMW engine family has a documented point when MG1/MD1 lock protection became active, and the system checks against that table rather than relying on DVX.
+
+Example mapping:
+
+B48 → locked from 06/2020
+
+B58TU/MG1 → locked from 06/2020
+
+B47/B57 (MD1) → locked from 06/2020
+
+S58 → locked from 06/2020
+
+This keeps the rules centralized and ensures that all classification is based on BMW’s actual ECU rollout, independent of the DVX dataset.
+
+4. How you would implement the fallback rule
+
+If DVX does not provide a production year and no engine code can be extracted, I default to the conservative classification. Any BMW model belonging to an MG1/MD1 platform—basically all G-series plus F40/F44—is treated as “post-June 2020” unless we have explicit evidence pointing the other way.
+
+This avoids false negatives, which would incorrectly assume an ECU is pre-lock. In professional workflows, the fallback always leans toward caution when data is incomplete.
+
+5. Short pseudo-code example
+
+function requiresUnlock(dvxEntry):
+
+# 1. Try to extract engine code directly
+engine = extractEngineCode(dvxEntry.description)
+
+# 2. Infer it if needed
+if engine is null:
+engine = inferEngineFromModel(dvxEntry.model,
+dvxEntry.displacement,
+dvxEntry.fuel)
+
+# 3. If we have an engine, check lock table
+if engine is not null:
+lockDate = INTERNAL_LOCK_TABLE[engine]
+
+# Use DVX year if it exists
+if dvxEntry.year is not null:
+return dvxEntry.year >= lockDate
+
+# No year → treat known MG1/MD1 engines as locked
+return true
+
+# 4. No engine identified → fallback based on platform
+if isMG1Platform(dvxEntry.model):
+return true
+
+# 5. Otherwise assume pre-lock
+return false
+
+
+--------------------------------------
+Tuesday, Nov 18
+BK
+Beau K
+4:00 AM
+Message Blocked
+We blocked a message from this user because it included a reference to another messaging platform. Contact information can only be shared after a contract starts. Review our policy for details.
+Message Blocked
+We blocked a message from this user because it included a reference to another messaging platform. Contact information can only be shared after a contract starts. Review our policy for details.
+------------------------------------------
+Hi Serhii!
+
+Your follow-up answer on the BMW MG1/MD1 logic was excellent — that’s exactly the precise, senior-level reasoning I was hoping for. Your approach to engine-code inference, fallback logic, and internal lock-date mapping shows you fully understand the real-world tuning context, not just the technical implementation.
+
+This sets you apart from every other applicant.
+
+I’d really like you to join Supreme Tuning for this project.
+Your communication, problem-solving, and clarity stand out, and I’m genuinely excited about working with you.
+
+Let’s lock this in. You proposed $800, and I’m happy to accept that.
+
+Is it OK for you to have short-lined contact via Whats... after we finished the deal? I rarely look here.
+
+Here are the final milestones we’ll use:
+Milestone 1 — DVX Scraper + JSON Database ($200)
+Full Puppeteer scraper (brand → model → type → engine → Stage 1/2)
+Stage 1+ and Stage 2+ auto-generation
+Internal BMW MG1/MD1 logic applied
+AMG M177/M178 CPC logic applied
+Output: supreme-tuning-master.json
+Acceptance: JSON loads correctly, data complete, scraper stable.
+
+Milestone 2 — Backend API + Calculator Integration ($350)
+Node/Express API (/brands, /models, /engines, /stages, /power)
+Fully functional React calculator (brand → model → engine → stage)
+Correct HP/Nm/gains display
+Automatic ECU/CPC messaging
+Acceptance: End-to-end calculator working using real scraped data.
+
+Milestone 3 — Admin Panel + Save System + Deployment ($250)
+Secure admin login
+Editable stages (HP/Nm, price, notes, rules, gearbox limits, etc.)
+/save endpoint writing clean JSON
+Backup creation on each save
+Deployment to staging/production
+Acceptance: Admin edits persist + calculator updates live.
+
+If these milestones look good to you, I’ll approve everything on Upwork immediately and we’ll get started.
+
+I’m hyped to work with you — your skillset and thinking style fit this project perfectly.
+Let’s build something clean, fast, and rock-solid together.
+
+Best regards,
+
+Beau
+Owner — Supreme Tuning NL
+
+BK
+Beau K sent an offer
+----------------------------------------------
+5:47 AM
+Seeking a skilled full stack developer to complete a tuning calculator and admin system for Supreme Tuning. The project involves enhancing an existing starter codebase using React and Node/Express, implementing a DVX data scraper, and ensuring seamless integration of business rules.
+
+Est. Budget: $800.00
+
+Milestone 1: DVX Scraper + JSON Database (Fast delivery)
+
+Due: Monday, Nov 24, 2025
+
+Project funds: $200.00
+
+View offer
+supreme_tuning_upwork_package.zip 
+supreme_tuning_upwork_package.zip
+11 kB
+Serhii Dzyhanovskyi accepted an offer
+---------------------------------------------------------
+1:16 PM
+Thank you for your offer.
+I will do my best on your project and ensure it is delivered on time and with reliable quality.
+
+View contract
