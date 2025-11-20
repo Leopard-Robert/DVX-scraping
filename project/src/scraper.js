@@ -25,12 +25,14 @@ class DVXScraper {
     this.data = {
       brands: [],
       models: [],
+      types: [],
       engines: [],
       stages: [],
     };
 
     this.counters = {
       brandId: 1,
+      typeId: 1,
       modelId: 1,
       engineId: 1,
       stageId: 1,
@@ -356,11 +358,22 @@ async scrapeStageData(engineUrl, engineName) {
           const types = await this.scrapeTypes(m.url, m.name);
 
           for (const t of types) {
+            const type = {
+              id: this.counters.typeId++,
+              modelId: model.id,
+              brandId: brand.id,
+              brandName: brand.name,
+              modelName: model.name,
+              typeName: t.name,
+            };
+            this.data.types.push(type);
+
             const engines = await this.scrapeEngines(t.url, t.name);
 
             for (const e of engines) {
               const engine = {
                 id: this.counters.engineId++,
+                typeName: type.typeName,
                 modelId: model.id,
                 code:
                   bmwRules.extractEngineCode(e.name) ||
@@ -401,6 +414,8 @@ async scrapeStageData(engineUrl, engineName) {
                   tunedNm: s.nm.tunedNm || 0,
                   gainHp: s.hp.hpGain || 0,
                   gainNm: s.nm.nmGain || 0,
+                  oldPrice: s.price.oldPrice || null,
+                  newPrice: s.price.newPrice || null,
                   price: null,
                   currency: "EUR",
                   hardwareMods: [],
@@ -413,6 +428,7 @@ async scrapeStageData(engineUrl, engineName) {
               }
             }
             await this.save(); // Save after each engine
+            console.log(this.data);
           }
         }
       }
