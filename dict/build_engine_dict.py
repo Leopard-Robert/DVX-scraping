@@ -7,9 +7,22 @@ OUTPUT_FILE = "engine_data.json"
 
 
 def normalize(s):
-    """Lowercase, remove extra spaces and dashes"""
-    if not s: return ""
+    """Lowercase, remove extra spaces/dashes"""
+    if not s:
+        return ""
     return re.sub(r"[\s\-]+", "", s.lower())
+
+
+def expand_chassis(chassis_str):
+    """
+    Convert F2x → regex F2[0-9] for search
+    """
+    if not chassis_str:
+        return ""
+    if "x" in chassis_str.lower():
+        pattern = re.escape(chassis_str.lower()).replace("x", "[0-9]")
+        return pattern
+    return re.escape(chassis_str.lower())
 
 
 def build_engine_dict(directory):
@@ -38,19 +51,20 @@ def build_engine_dict(directory):
             engine_type = engine_info.get("Motortype", "").strip()
             engine_name = engine_info.get("Enginecode", "").strip()
 
-            # Extract car models and years
+            # Extract models, years, and chassis patterns
             models = [c.get("model", "").strip() for c in cars if c.get("model")]
             years = [c.get("years", "").strip() for c in cars if c.get("years")]
+            chassis_patterns = [expand_chassis(c.get("group", "")) for c in cars if c.get("group")]
 
             # Store normalized tokens for search
             tokens = {
                 "model": [normalize(m) for m in models],
                 "year": years,
                 "engine_type": normalize(engine_type),
-                "engine_name": normalize(engine_name)
+                "engine_name": normalize(engine_name),
+                "chassis": chassis_patterns
             }
 
-            # Save entry
             engine_dict[code] = {
                 "engine_info": engine_info,
                 "cars": cars,
