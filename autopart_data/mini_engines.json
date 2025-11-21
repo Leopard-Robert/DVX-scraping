@@ -1,0 +1,1412 @@
+[
+  {
+    "engine_info": {
+      "Enginecode": "B37 C15 A",
+      "Motortype": "DIESEL",
+      "Cylinder": "3",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1496",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) Cooper D",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) One D",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F55)",
+        "model": "MINI MINI (F55) Cooper D",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F55)",
+        "model": "MINI MINI (F55) One D",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) One D",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (F57)",
+        "model": "MINI MINI Convertible (F57) Cooper D",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) One D",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 216 d",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 214 d",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 216 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 214 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Coupe (F44)",
+        "model": "BMW 2 Gran Coupe (F44) 216 d",
+        "years": "2019 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) sDrive 16 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X2",
+        "group": "BMW X2 (F39)",
+        "model": "BMW X2 (F39) sDrive 16 d",
+        "years": "2017 - Now"
+      },
+      {
+        "category": "BMW 1",
+        "group": "BMW 1 (F40)",
+        "model": "BMW 1 (F40) 116 d",
+        "years": "2019 - Now"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "B48 A20 A",
+      "Motortype": "Petrol Engine, Plug-In Hybrid",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1998",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) Cooper S",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) Cooper S JCW",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F55)",
+        "model": "MINI MINI (F55) Cooper S",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F55)",
+        "model": "MINI MINI (F55) Cooper S JCW",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) Cooper S",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) Cooper S ALL4",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) Cooper S JCW",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (F57)",
+        "model": "MINI MINI Convertible (F57) Cooper S",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (F57)",
+        "model": "MINI MINI Convertible (F57) Cooper S JCW",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper S",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper S ALL4",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 220 i",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 220 i",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Coupe (F44)",
+        "model": "BMW 2 Gran Coupe (F44) 220 i",
+        "years": "2019 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Coupe (F44)",
+        "model": "BMW 2 Gran Coupe (F44) 220 I xDrive",
+        "years": "2019 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) xDrive 20 i",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) sDrive 20 i",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 Van (F48)",
+        "model": "BMW X1 Van (F48) sDrive 20 i",
+        "years": "2015 - Now"
+      },
+      {
+        "category": "BMW X2",
+        "group": "BMW X2 (F39)",
+        "model": "BMW X2 (F39) sDrive 20 i",
+        "years": "2017 - Now"
+      },
+      {
+        "category": "BMW X2",
+        "group": "BMW X2 (F39)",
+        "model": "BMW X2 (F39) xDrive 20 i",
+        "years": "2017 - Now"
+      },
+      {
+        "category": "BMW 1",
+        "group": "BMW 1 (F40)",
+        "model": "BMW 1 (F40) 120 i",
+        "years": "2019 - Now"
+      },
+      {
+        "category": "BMW X3",
+        "group": "BMW X3 (G01, F97)",
+        "model": "BMW X3 (G01, F97) xDrive 30 e Plug-in-Hybrid",
+        "years": "2017 - Now"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "IB1P25B",
+      "Motortype": "Electric Motor, Hybrid",
+      "Cylinder": "between 0 and 2",
+      "Valves": "between 0 and 4",
+      "Cylindercapacity CCM": "between 0 and 647",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "BMW i3",
+        "group": "BMW i3 (I01)",
+        "model": "BMW i3 (I01) Electric",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW i3",
+        "group": "BMW i3 (I01)",
+        "model": "BMW i3 (I01) Range Extender",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW i3",
+        "group": "BMW i3 (I01)",
+        "model": "BMW i3 (I01) s Electric",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW i3",
+        "group": "BMW i3 (I01)",
+        "model": "BMW i3 (I01) s Range Extender",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) Cooper SE / Electric",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (F57)",
+        "model": "MINI MINI Convertible (F57) Cooper SE",
+        "years": "2014 - Now"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "9HZ (DV6TED4)",
+      "Motortype": "DIESEL",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1560",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "CITROËN BERLINGO",
+        "group": "CITROËN BERLINGO MULTISPACE (B9)",
+        "model": "CITROËN BERLINGO MULTISPACE (B9) 1.6 HDi 110",
+        "years": "2008 - 2018"
+      },
+      {
+        "category": "CITROËN BERLINGO",
+        "group": "CITROËN BERLINGO Box (B9)",
+        "model": "CITROËN BERLINGO Box (B9) 1.6 HDi 110",
+        "years": "2008 - 2018"
+      },
+      {
+        "category": "CITROËN C2",
+        "group": "CITROËN C2 (JM_)",
+        "model": "CITROËN C2 (JM_) 1.6 HDi",
+        "years": "2003 - 2017"
+      },
+      {
+        "category": "CITROËN C3",
+        "group": "CITROËN C3 I (FC_, FN_)",
+        "model": "CITROËN C3 I (FC_, FN_) 1.6 16V HDi",
+        "years": "2002 - Now"
+      },
+      {
+        "category": "CITROËN C3",
+        "group": "CITROËN C3 Picasso (SH_)",
+        "model": "CITROËN C3 Picasso (SH_) 1.6 HDi",
+        "years": "2009 - 2017"
+      },
+      {
+        "category": "CITROËN C4",
+        "group": "CITROËN C4 I (LC_)",
+        "model": "CITROËN C4 I (LC_) 1.6 HDi",
+        "years": "2004 - 2013"
+      },
+      {
+        "category": "CITROËN C4",
+        "group": "CITROËN C4 Coupe (LA_)",
+        "model": "CITROËN C4 Coupe (LA_) 1.6 HDi",
+        "years": "2004 - 2013"
+      },
+      {
+        "category": "CITROËN C4",
+        "group": "CITROËN C4 Grand Picasso I (UA_)",
+        "model": "CITROËN C4 Grand Picasso I (UA_) 1.6 HDi",
+        "years": "2006 - 2013"
+      },
+      {
+        "category": "CITROËN C4",
+        "group": "CITROËN C4 Picasso I MPV (UD_)",
+        "model": "CITROËN C4 Picasso I MPV (UD_) 1.6 HDi",
+        "years": "2006 - 2015"
+      },
+      {
+        "category": "CITROËN C4",
+        "group": "CITROËN C4 I Saloon",
+        "model": "CITROËN C4 I Saloon 1.6 HDi",
+        "years": "2006 - 2012"
+      },
+      {
+        "category": "CITROËN C5",
+        "group": "CITROËN C5 II (RC_)",
+        "model": "CITROËN C5 II (RC_) 1.6 HDi (RC8HZB)",
+        "years": "2004 - Now"
+      },
+      {
+        "category": "CITROËN C5",
+        "group": "CITROËN C5 III (RD_)",
+        "model": "CITROËN C5 III (RD_) 1.6 HDi 110",
+        "years": "2008 - 2021"
+      },
+      {
+        "category": "CITROËN C5",
+        "group": "CITROËN C5 II Break (RE_)",
+        "model": "CITROËN C5 II Break (RE_) 1.6 HDi (RE8HZB)",
+        "years": "2004 - 2008"
+      },
+      {
+        "category": "CITROËN C5",
+        "group": "CITROËN C5 III Break (RW_)",
+        "model": "CITROËN C5 III Break (RW_) 1.6 HDi 110",
+        "years": "2008 - 2021"
+      },
+      {
+        "category": "CITROËN C5",
+        "group": "CITROËN C5 Box Body/Estate (DE_, RE_)",
+        "model": "CITROËN C5 Box Body/Estate (DE_, RE_) 1.6 HDi",
+        "years": "2004 - 2008"
+      },
+      {
+        "category": "CITROËN XSARA",
+        "group": "CITROËN XSARA PICASSO (N68)",
+        "model": "CITROËN XSARA PICASSO (N68) 1.6 HDi",
+        "years": "1999 - 2012"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) One D",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) Cooper D",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (R55)",
+        "model": "MINI MINI CLUBMAN (R55) Cooper D",
+        "years": "2006 - 2015"
+      },
+      {
+        "category": "PEUGEOT 1007",
+        "group": "PEUGEOT 1007 (KM_)",
+        "model": "PEUGEOT 1007 (KM_) 1.6 HDi",
+        "years": "2005 - 2009"
+      },
+      {
+        "category": "PEUGEOT 206",
+        "group": "PEUGEOT 206 CC (2D)",
+        "model": "PEUGEOT 206 CC (2D) 1.6 HDi 110",
+        "years": "2000 - 2008"
+      },
+      {
+        "category": "PEUGEOT 206",
+        "group": "PEUGEOT 206 Hatchback (2A/C)",
+        "model": "PEUGEOT 206 Hatchback (2A/C) 1.6 HDi 110",
+        "years": "1998 - 2012"
+      },
+      {
+        "category": "PEUGEOT 206",
+        "group": "PEUGEOT 206 SW (2E/K)",
+        "model": "PEUGEOT 206 SW (2E/K) 1.6 HDi 110",
+        "years": "2002 - 2012"
+      },
+      {
+        "category": "PEUGEOT 207",
+        "group": "PEUGEOT 207 (WA_, WC_)",
+        "model": "PEUGEOT 207 (WA_, WC_) 1.6 HDi",
+        "years": "2006 - 2015"
+      },
+      {
+        "category": "PEUGEOT 207",
+        "group": "PEUGEOT 207 CC (WD_)",
+        "model": "PEUGEOT 207 CC (WD_) 1.6 HDi",
+        "years": "2007 - 2015"
+      },
+      {
+        "category": "PEUGEOT 207",
+        "group": "PEUGEOT 207 SW (WK_)",
+        "model": "PEUGEOT 207 SW (WK_) 1.6 HDi",
+        "years": "2007 - 2013"
+      },
+      {
+        "category": "PEUGEOT 207",
+        "group": "PEUGEOT 207 SW Box Body/Estate (WK_)",
+        "model": "PEUGEOT 207 SW Box Body/Estate (WK_) 1.6 HDi",
+        "years": "2007 - 2012"
+      },
+      {
+        "category": "PEUGEOT 207",
+        "group": "PEUGEOT 207 Van (WA_, WC_)",
+        "model": "PEUGEOT 207 Van (WA_, WC_) 1.6 HDi",
+        "years": "2006 - 2013"
+      },
+      {
+        "category": "PEUGEOT 3008",
+        "group": "PEUGEOT 3008 MPV (0U_)",
+        "model": "PEUGEOT 3008 MPV (0U_) 1.6 HDi",
+        "years": "2009 - 2017"
+      },
+      {
+        "category": "PEUGEOT 3008",
+        "group": "PEUGEOT 3008 Van (0U_)",
+        "model": "PEUGEOT 3008 Van (0U_) HDi 110 (0U9HZ8, 0U9HZT)",
+        "years": "2009 - 2017"
+      },
+      {
+        "category": "PEUGEOT 307",
+        "group": "PEUGEOT 307 (3A/C)",
+        "model": "PEUGEOT 307 (3A/C) 1.6 HDi 110",
+        "years": "2000 - 2012"
+      },
+      {
+        "category": "PEUGEOT 307",
+        "group": "PEUGEOT 307 Estate (3E)",
+        "model": "PEUGEOT 307 Estate (3E) 1.6 HDi 110",
+        "years": "2002 - 2009"
+      },
+      {
+        "category": "PEUGEOT 307",
+        "group": "PEUGEOT 307 SW (3H)",
+        "model": "PEUGEOT 307 SW (3H) 1.6 HDI 110",
+        "years": "2002 - 2009"
+      },
+      {
+        "category": "PEUGEOT 308",
+        "group": "PEUGEOT 308 I (4A_, 4C_)",
+        "model": "PEUGEOT 308 I (4A_, 4C_) 1.6 HDi",
+        "years": "2007 - 2016"
+      },
+      {
+        "category": "PEUGEOT 308",
+        "group": "PEUGEOT 308 SW I (4E_, 4H_)",
+        "model": "PEUGEOT 308 SW I (4E_, 4H_) 1.6 HDi",
+        "years": "2007 - 2014"
+      },
+      {
+        "category": "PEUGEOT 308",
+        "group": "PEUGEOT 308 CC (4B_)",
+        "model": "PEUGEOT 308 CC (4B_) 1.6 HDi",
+        "years": "2009 - 2015"
+      },
+      {
+        "category": "PEUGEOT 308",
+        "group": "PEUGEOT 308 SW I Box Body/Estate (4E_)",
+        "model": "PEUGEOT 308 SW I Box Body/Estate (4E_) 1.6 HDi",
+        "years": "2008 - 2012"
+      },
+      {
+        "category": "PEUGEOT 407",
+        "group": "PEUGEOT 407 (6D_)",
+        "model": "PEUGEOT 407 (6D_) 1.6 HDi 110",
+        "years": "2004 - 2011"
+      },
+      {
+        "category": "PEUGEOT 407",
+        "group": "PEUGEOT 407 SW (6E_)",
+        "model": "PEUGEOT 407 SW (6E_) 1.6 HDi 110",
+        "years": "2004 - 2011"
+      },
+      {
+        "category": "PEUGEOT 407",
+        "group": "PEUGEOT 407 SW Box Body/Estate (6E_)",
+        "model": "PEUGEOT 407 SW Box Body/Estate (6E_) 1.6 HDi",
+        "years": "2004 - 2010"
+      },
+      {
+        "category": "PEUGEOT 5008",
+        "group": "PEUGEOT 5008 (0U_, 0E_)",
+        "model": "PEUGEOT 5008 (0U_, 0E_) 1.6 HDi",
+        "years": "2009 - 2017"
+      },
+      {
+        "category": "PEUGEOT PARTNER",
+        "group": "PEUGEOT PARTNER Box",
+        "model": "PEUGEOT PARTNER Box 1.6 HDi",
+        "years": "2008 - Now"
+      },
+      {
+        "category": "PEUGEOT PARTNER",
+        "group": "PEUGEOT PARTNER Tepee",
+        "model": "PEUGEOT PARTNER Tepee 1.6 HDi",
+        "years": "2008 - Now"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "B47 C20 A",
+      "Motortype": "DIESEL",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1995",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F55)",
+        "model": "MINI MINI (F55) Cooper SD",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) Cooper SD",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) Cooper D",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) Cooper SD",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) Cooper SD ALL4",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (F57)",
+        "model": "MINI MINI Convertible (F57) Cooper SD",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper D",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper D ALL4",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper SD",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper SD ALL4",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 218 d",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 220 d",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 220 d xDrive",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 218 d xDrive",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 218 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 220 d xDrive",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 220 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 218 d xDrive",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer Van (F46)",
+        "model": "BMW 2 Gran Tourer Van (F46) 218 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer Van (F46)",
+        "model": "BMW 2 Gran Tourer Van (F46) 220 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer Van (F45)",
+        "model": "BMW 2 Active Tourer Van (F45) 218 d",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer Van (F45)",
+        "model": "BMW 2 Active Tourer Van (F45) 220 d",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) sDrive 18 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) xDrive 18 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) xDrive 20 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) sDrive 20 d",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 Van (F48)",
+        "model": "BMW X1 Van (F48) sDrive 20 d",
+        "years": "2015 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 Van (F48)",
+        "model": "BMW X1 Van (F48) sDrive 18 d",
+        "years": "2015 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 Van (F48)",
+        "model": "BMW X1 Van (F48) xDrive 20 d",
+        "years": "2015 - Now"
+      },
+      {
+        "category": "BMW X2",
+        "group": "BMW X2 (F39)",
+        "model": "BMW X2 (F39) xDrive 20 d",
+        "years": "2017 - Now"
+      },
+      {
+        "category": "BMW X2",
+        "group": "BMW X2 (F39)",
+        "model": "BMW X2 (F39) sDrive 18 d",
+        "years": "2017 - Now"
+      },
+      {
+        "category": "BMW X2",
+        "group": "BMW X2 (F39)",
+        "model": "BMW X2 (F39) sDrive 20 d",
+        "years": "2017 - Now"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "N14 B16 C",
+      "Motortype": "Petrol Engine",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1598",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) John Cooper Works",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) John Cooper Works GP",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (R55)",
+        "model": "MINI MINI CLUBMAN (R55) John Cooper Works",
+        "years": "2006 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (R57)",
+        "model": "MINI MINI Convertible (R57) John Cooper Works",
+        "years": "2007 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Coupe (R58)",
+        "model": "MINI MINI Coupe (R58) John Cooper Works",
+        "years": "2010 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Roadster (R59)",
+        "model": "MINI MINI Roadster (R59) John Cooper Works",
+        "years": "2011 - 2015"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "N47 C16 A",
+      "Motortype": "DIESEL",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1598",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) One D",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) Cooper D",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (R55)",
+        "model": "MINI MINI CLUBMAN (R55) One D",
+        "years": "2006 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (R55)",
+        "model": "MINI MINI CLUBMAN (R55) Cooper D",
+        "years": "2006 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (R57)",
+        "model": "MINI MINI Convertible (R57) Cooper D",
+        "years": "2007 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (R60)",
+        "model": "MINI MINI COUNTRYMAN (R60) One D",
+        "years": "2010 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (R60)",
+        "model": "MINI MINI COUNTRYMAN (R60) Cooper D",
+        "years": "2010 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (R60)",
+        "model": "MINI MINI COUNTRYMAN (R60) Cooper D ALL4",
+        "years": "2010 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBVAN (R55)",
+        "model": "MINI MINI CLUBVAN (R55) Cooper D",
+        "years": "2012 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI PACEMAN (R61)",
+        "model": "MINI MINI PACEMAN (R61) Cooper D",
+        "years": "2012 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI PACEMAN (R61)",
+        "model": "MINI MINI PACEMAN (R61) Cooper D ALL4",
+        "years": "2012 - 2016"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "N12 B16 A",
+      "Motortype": "Petrol Engine",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1598",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) Cooper",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (R55)",
+        "model": "MINI MINI CLUBMAN (R55) Cooper",
+        "years": "2006 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (R57)",
+        "model": "MINI MINI Convertible (R57) Cooper",
+        "years": "2007 - 2015"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "W11 B16 A",
+      "Motortype": "Petrol Engine",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1598",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R50, R53)",
+        "model": "MINI MINI (R50, R53) Cooper S",
+        "years": "2001 - 2006"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R50, R53)",
+        "model": "MINI MINI (R50, R53) S Works",
+        "years": "2001 - 2006"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R50, R53)",
+        "model": "MINI MINI (R50, R53) Works",
+        "years": "2001 - 2006"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R50, R53)",
+        "model": "MINI MINI (R50, R53) John Cooper Works",
+        "years": "2001 - 2006"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (R52)",
+        "model": "MINI MINI Convertible (R52) Cooper S",
+        "years": "2004 - 2008"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (R52)",
+        "model": "MINI MINI Convertible (R52) John Cooper Works",
+        "years": "2004 - 2008"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "N18 B16 A",
+      "Motortype": "Petrol Engine",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1598",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) Cooper S",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) Cooper S John Cooper Works",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (R55)",
+        "model": "MINI MINI CLUBMAN (R55) Cooper S",
+        "years": "2006 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (R57)",
+        "model": "MINI MINI Convertible (R57) Cooper S",
+        "years": "2007 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Coupe (R58)",
+        "model": "MINI MINI Coupe (R58) Cooper S",
+        "years": "2010 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Coupe (R58)",
+        "model": "MINI MINI Coupe (R58) Cooper S JCW",
+        "years": "2010 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (R60)",
+        "model": "MINI MINI COUNTRYMAN (R60) Cooper S",
+        "years": "2010 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (R60)",
+        "model": "MINI MINI COUNTRYMAN (R60) Cooper S ALL4",
+        "years": "2010 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (R60)",
+        "model": "MINI MINI COUNTRYMAN (R60) Cooper ALL4",
+        "years": "2010 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Roadster (R59)",
+        "model": "MINI MINI Roadster (R59) Cooper S",
+        "years": "2011 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Roadster (R59)",
+        "model": "MINI MINI Roadster (R59) Cooper S JCW",
+        "years": "2011 - 2015"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI PACEMAN (R61)",
+        "model": "MINI MINI PACEMAN (R61) Cooper S",
+        "years": "2012 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI PACEMAN (R61)",
+        "model": "MINI MINI PACEMAN (R61) Cooper S ALL4",
+        "years": "2012 - 2016"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI PACEMAN (R61)",
+        "model": "MINI MINI PACEMAN (R61) Cooper ALL4",
+        "years": "2012 - 2016"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "N12 B14 A",
+      "Motortype": "Petrol Engine",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1397",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) One",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R56)",
+        "model": "MINI MINI (R56) One LPG",
+        "years": "2005 - 2014"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (R55)",
+        "model": "MINI MINI CLUBMAN (R55) One",
+        "years": "2006 - 2015"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "W10 B16 A",
+      "Motortype": "Petrol Engine",
+      "Cylinder": "4",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1598",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R50, R53)",
+        "model": "MINI MINI (R50, R53) One",
+        "years": "2001 - 2006"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R50, R53)",
+        "model": "MINI MINI (R50, R53) Cooper",
+        "years": "2001 - 2006"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (R52)",
+        "model": "MINI MINI Convertible (R52) One",
+        "years": "2004 - 2008"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (R52)",
+        "model": "MINI MINI Convertible (R52) Cooper",
+        "years": "2004 - 2008"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "XE2",
+      "Motortype": "Electric Motor",
+      "Cylinder": "0",
+      "Valves": "0",
+      "Cylindercapacity CCM": "0",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "BMW iX",
+        "group": "BMW iX (I20)",
+        "model": "BMW iX (I20) xDrive40",
+        "years": "2021 - Now"
+      },
+      {
+        "category": "BMW iX",
+        "group": "BMW iX (I20)",
+        "model": "BMW iX (I20) xDrive50",
+        "years": "2021 - Now"
+      },
+      {
+        "category": "BMW i4",
+        "group": "BMW i4 (G26)",
+        "model": "BMW i4 (G26) eDrive40",
+        "years": "2021 - Now"
+      },
+      {
+        "category": "BMW i4",
+        "group": "BMW i4 (G26)",
+        "model": "BMW i4 (G26) M50 All-wheel Drive",
+        "years": "2021 - Now"
+      },
+      {
+        "category": "BMW 7",
+        "group": "BMW 7 (G70)",
+        "model": "BMW 7 (G70) i7 M70 xDrive",
+        "years": "2022 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (U11)",
+        "model": "BMW X1 (U11) iX1 xDrive 30",
+        "years": "2022 - Now"
+      },
+      {
+        "category": "BMW 5",
+        "group": "BMW 5 (G60)",
+        "model": "BMW 5 (G60) i5 xDrive40 xDrive",
+        "years": "2023 - Now"
+      },
+      {
+        "category": "ROLLS-ROYCE SPECTRE",
+        "group": "ROLLS-ROYCE SPECTRE (RR25)",
+        "model": "ROLLS-ROYCE SPECTRE (RR25) EV",
+        "years": "2023 - Now"
+      },
+      {
+        "category": "MINI COUNTRYMAN",
+        "group": "MINI MINI COUNTRYMAN (U25)",
+        "model": "MINI MINI COUNTRYMAN (U25) SE ALL4",
+        "years": "2023 - Now"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "1ND",
+      "Motortype": "DIESEL",
+      "Cylinder": "4",
+      "Valves": "2",
+      "Cylindercapacity CCM": "1364",
+      "Horsepower (HP)": "75"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (R50, R53)",
+        "model": "MINI MINI (R50, R53) One D",
+        "years": "2001 - 2006"
+      }
+    ]
+  },
+  {
+    "engine_info": {
+      "Enginecode": "B38 A15 A",
+      "Motortype": "Petrol Engine, Hybrid, Plug-In Hybrid",
+      "Cylinder": "3",
+      "Valves": "4",
+      "Cylindercapacity CCM": "1499",
+      "Horsepower (HP)": "--"
+    },
+    "cars": [
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) Cooper",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) One First",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F56)",
+        "model": "MINI MINI (F56) One",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F55)",
+        "model": "MINI MINI (F55) Cooper",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F55)",
+        "model": "MINI MINI (F55) One First",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI (F55)",
+        "model": "MINI MINI (F55) One",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) Cooper",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI CLUBMAN (F54)",
+        "model": "MINI MINI CLUBMAN (F54) One",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (F57)",
+        "model": "MINI MINI Convertible (F57) Cooper",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI Convertible (F57)",
+        "model": "MINI MINI Convertible (F57) One",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper ALL4",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) Cooper SE ALL4",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "MINI MINI",
+        "group": "MINI MINI COUNTRYMAN (F60)",
+        "model": "MINI MINI COUNTRYMAN (F60) One",
+        "years": "2016 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 218 i",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 216 i",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 225 xe",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer (F45)",
+        "model": "BMW 2 Active Tourer (F45) 225 xe Plug-in-Hybrid",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 218 i",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer (F46)",
+        "model": "BMW 2 Gran Tourer (F46) 216 i",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Active Tourer Van (F45)",
+        "model": "BMW 2 Active Tourer Van (F45) 218 i",
+        "years": "2013 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Tourer Van (F46)",
+        "model": "BMW 2 Gran Tourer Van (F46) 218 i",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW 2",
+        "group": "BMW 2 Gran Coupe (F44)",
+        "model": "BMW 2 Gran Coupe (F44) 218 i",
+        "years": "2019 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) sDrive 18 i",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 (F48)",
+        "model": "BMW X1 (F48) xDrive 25 e Plug-in-Hybrid",
+        "years": "2014 - Now"
+      },
+      {
+        "category": "BMW X1",
+        "group": "BMW X1 Van (F48)",
+        "model": "BMW X1 Van (F48) sDrive 18 i",
+        "years": "2015 - Now"
+      },
+      {
+        "category": "BMW X2",
+        "group": "BMW X2 (F39)",
+        "model": "BMW X2 (F39) sDrive 18 i",
+        "years": "2017 - Now"
+      },
+      {
+        "category": "BMW X2",
+        "group": "BMW X2 (F39)",
+        "model": "BMW X2 (F39) xDrive 25 e Plug-in-Hybrid",
+        "years": "2017 - Now"
+      },
+      {
+        "category": "BMW 1",
+        "group": "BMW 1 (F40)",
+        "model": "BMW 1 (F40) 118 i",
+        "years": "2019 - Now"
+      },
+      {
+        "category": "BMW 1",
+        "group": "BMW 1 (F40)",
+        "model": "BMW 1 (F40) 116 i",
+        "years": "2019 - Now"
+      }
+    ]
+  }
+]

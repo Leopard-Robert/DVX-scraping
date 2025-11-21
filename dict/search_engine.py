@@ -16,8 +16,9 @@ DB_WEIGHTS = {
     "engine_codes.json": 0.75
 }
 
+# Brand aliases for query normalization
 BRAND_ALIASES = {
-    "volkswagen" : "vw",
+    "volkswagen": "volkswagen",
     "volkswagen": "vw",
     "vw": "vw",
     "bmw": "bmw",
@@ -35,24 +36,37 @@ BRAND_ALIASES = {
 }
 
 # ---------------------------
+# SCORING WEIGHTS
+# You can adjust these to prioritize model/engine_type/car_type/year
+# ---------------------------
+SCORING_WEIGHTS = {
+    "model": 0.5,          # Highest priority
+    "engine_type": 0.2,
+    "car_type": 0.15,      # New: type of the car
+    "year": 0.15,
+    "engine_name": 0.05
+}
+
+# ---------------------------
 # HELPER FUNCTIONS
 # ---------------------------
 
 def normalize(s):
+    """Normalize string for fuzzy matching: lowercase, remove spaces and hyphens"""
     if not s:
         return ""
     return re.sub(r"[\s\-]+", "", s.lower())
 
 def normalize_brand(q):
-    """Normalize brand words in query using alias map."""
+    """Replace brand names in query with aliases"""
     q = q.lower()
     for b in BRAND_ALIASES:
         if b in q:
             q = q.replace(b, BRAND_ALIASES[b])
     return q
 
-
 def load_databases(file_list):
+    """Load multiple JSON files, each with a weight"""
     engine_dicts = []
     for file in file_list:
         with open(file, "r", encoding="utf-8") as f:
@@ -61,118 +75,68 @@ def load_databases(file_list):
         engine_dicts.append((data, weight))
     return engine_dicts
 
-
 # ---------------------------
-# YEAR RANGE PARSING
+# YEAR RANGE FUNCTIONS
 # ---------------------------
 
 def parse_year(text):
-    """Extract a single year (int) or return None."""
     m = re.search(r"(19|20)\d{2}", text)
     return int(m.group()) if m else None
 
-
 def parse_year_range(text):
-    """
-    Convert things like:
-    "2015 -> 2019"
-    "... -> 2017"
-    "2018 -> ..."
-    "2015"
-    into (start, end)
-    """
     text = text.replace("...", "").strip()
-
-    # Range format: "YYYY -> YYYY"
     if "->" in text:
         left, right = text.split("->")
-        left = left.strip()
-        right = right.strip()
-
-        start = parse_year(left)
-        end = parse_year(right)
-
+        start = parse_year(left.strip())
+        end = parse_year(right.strip())
         return start, end
-
-    # Single year
     y = parse_year(text)
-    if y:
-        return (y, y)
-
-    return (None, None)
-
+    return (y, y) if y else (None, None)
 
 def match_year_range(query_start, query_end, db_year_list):
-    """
-    Safe overlap check between query year range and DB year ranges.
-    Handles None safely (NO crashes).
-    """
     if not db_year_list:
         return False
 
-    # No query year in input
-    if query_start is None and query_end is None:
-        return False
-
-    q_start = query_start
-    q_end = query_end
-
     for y_str in db_year_list:
         db_start, db_end = parse_year_range(y_str)
-
         if db_start is None and db_end is None:
             continue
-
-        # Convert single year
         if db_start is None:
             db_start = db_end
         if db_end is None:
             db_end = db_start
 
-        # ---- Overlap logic ----
-
-        # Case: ... -> Y  (query_end only)
-        if q_start is None and q_end is not None:
-            if db_start <= q_end:
+        if query_start is None and query_end is not None:
+            if db_start <= query_end:
                 return True
-
-        # Case: Y -> ...  (query_start only)
-        if q_end is None and q_start is not None:
-            if db_end >= q_start:
+        elif query_end is None and query_start is not None:
+            if db_end >= query_start:
                 return True
-
-        # Full range given: Y1 -> Y2
-        if q_start is not None and q_end is not None:
-            # check overlap
-            if not (q_end < db_start or q_start > db_end):
+        elif query_start is not None and query_end is not None:
+            if not (query_end < db_start or query_start > db_end):
                 return True
-
     return False
-
 
 # ---------------------------
 # QUERY TOKEN EXTRACTION
 # ---------------------------
 
 def extract_query_tokens(query):
-    q = normalize_brand(query.lower())
+    q = normalize_brand(query)
 
-    # Engine name (BMW style)
+    # Engine name
     engine_name = re.search(r"[nN]\d{2}\s?[A-Z0-9]{2,3}", q)
     engine_name = engine_name.group() if engine_name else ""
 
-    # Year range patterns
-    # Example: "2015 -> 2019" or "2015-2019" or "2015~2019"
+    # Year ranges
     range_match = re.search(r"(19|20)\d{2}\s*[-~>]+\s*(19|20)\d{2}", q)
     query_start = None
     query_end = None
     if range_match:
-        yr1 = int(range_match.group(1) + query[range_match.start():range_match.end()][2:4])
-        yr2 = int(range_match.group(2) + query[range_match.start():range_match.end()][-2:])
-        query_start = yr1
-        query_end = yr2
+        start, end = parse_year_range(range_match.group())
+        query_start = start
+        query_end = end
 
-    # Single year
     year = parse_year(q)
     if year and query_start is None:
         query_start = year
@@ -189,9 +153,13 @@ def extract_query_tokens(query):
     chassis_match = re.search(r"[fe]\d{2}[a-zA-Z0-9]*", q)
     chassis = chassis_match.group() if chassis_match else ""
 
-    # Remove detected tokens from model text
+    # Car type (optional in query)
+    car_type_match = re.search(r"(sedan|hatchback|coupe|suv|cabriolet|convertible|lc|lci|tourer|wagon|estate)", q)
+    car_type = car_type_match.group() if car_type_match else ""
+
+    # Model
     model = q
-    for x in [engine_name, str(year) if year else "", chassis]:
+    for x in [engine_name, str(year) if year else "", chassis, car_type]:
         if x:
             model = model.replace(x.lower(), "")
     model = normalize(model.strip())
@@ -202,9 +170,9 @@ def extract_query_tokens(query):
         "year_start": query_start,
         "year_end": query_end,
         "chassis": normalize(chassis),
-        "model": model
+        "model": model,
+        "car_type": normalize(car_type)
     }
-
 
 def match_chassis(query_chassis, chassis_patterns):
     q = query_chassis.lower()
@@ -213,36 +181,36 @@ def match_chassis(query_chassis, chassis_patterns):
             return True
     return False
 
-
 # ---------------------------
-# SCORING (UNCHANGED)
+# SCORING
 # ---------------------------
 
 def weighted_match_score(query_tokens, entry_tokens, weights=None):
     if weights is None:
-        weights = {
-            "engine_name": 0.05,
-            "model": 0.8,
-            "year": 0.2,
-            "engine_type": 0.25,
-        }
+        weights = SCORING_WEIGHTS
 
     score = 0.0
 
-    score += fuzz.token_sort_ratio(query_tokens["engine_name"], entry_tokens["engine_name"]) * weights["engine_name"]
-    score += fuzz.token_sort_ratio(query_tokens["engine_type"], entry_tokens["engine_type"]) * weights["engine_type"]
-
-    # Model fuzzy
+    # Model first
     model_scores = [fuzz.token_sort_ratio(query_tokens["model"], m) for m in entry_tokens["model"]]
     if model_scores:
         score += max(model_scores) * weights["model"]
 
-    # Year-range match
+    # Engine type
+    score += fuzz.token_sort_ratio(query_tokens["engine_type"], entry_tokens["engine_type"]) * weights["engine_type"]
+
+    # Car type
+    if "car_type" in entry_tokens:
+        score += fuzz.token_sort_ratio(query_tokens["car_type"], entry_tokens.get("car_type", "")) * weights["car_type"]
+
+    # Year
     if match_year_range(query_tokens["year_start"], query_tokens["year_end"], entry_tokens["year"]):
         score += 100 * weights["year"]
 
-    return score
+    # Engine code
+    score += fuzz.token_sort_ratio(query_tokens["engine_name"], entry_tokens["engine_name"]) * weights.get("engine_name", 0)
 
+    return score
 
 # ---------------------------
 # SEARCH ENGINE
@@ -254,7 +222,7 @@ def search_engine(query, engine_dicts, top_n=5):
 
     for data, db_weight in engine_dicts:
         for code, entry in data.items():
-            score = weighted_match_score(query_tokens, entry["tokens"])
+            score = weighted_match_score(query_tokens, entry["tokens"], SCORING_WEIGHTS)
             score *= db_weight
             results.append({
                 "engine_code": code,
@@ -264,7 +232,6 @@ def search_engine(query, engine_dicts, top_n=5):
 
     results.sort(key=lambda x: x["score"], reverse=True)
     return results[:top_n]
-
 
 # ---------------------------
 # MAIN

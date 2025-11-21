@@ -40,10 +40,10 @@ export const CONFIG = {
   
   // Wait times (in milliseconds)
   waitTimes: {
-    navigation: 5000,
+    navigation: 500,
     shortDelay: 500,
-    mediumDelay: 10000,
-    longDelay: 2000
+    mediumDelay: 1000,
+    longDelay: 200
   },
   
   // Output path
