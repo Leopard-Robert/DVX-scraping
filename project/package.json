@@ -9,7 +9,10 @@
     "demo": "node src/test.js",
     "test": "node src/test-scraper.js",
     "test:rules": "node src/test-scraper.js",
-    "clean": "rm -rf data/*.json"
+    "clean": "rm -rf data/*.json",
+    "start-scrape": "node src/scraper.js",
+    "start-search": "python src/database/search_engine.py",
+    "scrape-and-search": "concurrently \"npm run start-scrape\" \"npm run start-python\""
   },
   "keywords": [
     "scraper",
