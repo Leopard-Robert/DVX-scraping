@@ -96,6 +96,19 @@ export function inferAMGEngine(modelName, engineName) {
   return null;
 }
 
+export function parseYearRange(startYear, endYear, judgementYear) {
+  
+  if (endYear === 'now') {
+    endYear = new Date().getFullYear();
+  }
+  if (startYear === null) {
+    return endYear >= judgementYear;
+  }
+  if (startYear && endYear) {
+    return startYear >= judgementYear || endYear >= judgementYear;
+  }
+}
+
 /**
  * Extract year from type/platform string
  * Examples: "W213 - 2016 -> 2020", "C190 - 2015 -> ..."
@@ -170,6 +183,7 @@ export default {
   requiresCPCUpgrade,
   generateCPCUpgradeInfo,
   isAMGModel,
+  parseYearRange,
   AMG_V8_ENGINES,
   AMG_MODEL_PATTERNS
 };

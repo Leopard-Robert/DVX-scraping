@@ -12,8 +12,8 @@ import uvicorn
 DATA_DIR = "./database"
 
 DB_FILES = [
-    "engine_data.json",
-    "engine_codes.json"
+    "engine_data.json",   # High priority
+    "engine_codes.json"   # Lower priority
 ]
 
 DB_WEIGHTS = {
@@ -21,12 +21,10 @@ DB_WEIGHTS = {
     "engine_codes.json": 0.75
 }
 
-# Brand normalization
 BRAND_ALIASES = {
     "volkswagen": "volkswagen",
     "volkswagen": "vw",
     "vw": "vw",
-    "volkswagon": "vw",
     "bmw": "bmw",
     "mercedes": "mercedes",
     "mercedes-benz": "mercedes",
@@ -42,27 +40,25 @@ BRAND_ALIASES = {
     "aston martin": "aston martin"
 }
 
-# NEW — Normalize engine fuel types
 ENGINE_TYPE_MAP = {
     "petrol": "petrol",
     "petrol engine": "petrol",
     "gasoline": "petrol",
-
     "diesel": "diesel",
     "diesel engine": "diesel",
-
     "hybrid": "hybrid",
     "pluginhybrid": "hybrid",
     "plug-in hybrid": "hybrid",
-    "phev": "hybrid",
+    "phev": "hybrid"
 }
 
 SCORING_WEIGHTS = {
-    "model": 0.50,
-    "engine_type": 0.20,
-    "car_type": 0.15,
-    "year": 0.15,
-    "engine_name": 0.05
+    "model": 0.5,
+    "engine_type": 0.3,
+    "car_type": 0.2,
+    "year": 0.4,
+    "engine_name": 0.25,
+    "hp": 0.1
 }
 
 # -----------------------------------------------
@@ -75,11 +71,10 @@ def normalize(s):
     return re.sub(r"[\s\-]+", "", s.lower())
 
 def normalize_brand(q):
+    if not q:
+        return ""
     q = q.lower()
-    for key, alias in BRAND_ALIASES.items():
-        if key in q:
-            q = q.replace(key, alias)
-    return q
+    return BRAND_ALIASES.get(q, q)
 
 def normalize_engine_type(t):
     if not t:
@@ -120,7 +115,6 @@ def match_year_range(query_start, query_end, db_year_list):
             continue
         if db_start is None: db_start = db_end
         if db_end is None: db_end = db_start
-        # Overlap check
         if query_start is None and query_end is not None:
             if db_start <= query_end:
                 return True
@@ -133,69 +127,53 @@ def match_year_range(query_start, query_end, db_year_list):
     return False
 
 # -----------------------------------------------
-# QUERY PARSER (UPDATED)
+# STEP 0: PARSE QUERY
 # -----------------------------------------------
 
-def extract_query_tokens(query):
-    q = normalize_brand(query)
-
-    # Extract engine code-like patterns
-    engine_name = re.search(r"[MN]\d{2,3}\s?[A-Z0-9]{2,3}", q)
-    engine_name = engine_name.group() if engine_name else ""
-
-    # Extract HP
-    hp_match = re.search(r"(\d{2,4})\s?(hp|ps|pk|bhp)", q)
-    hp = int(hp_match.group(1)) if hp_match else None
-
-    # Year and range
-    range_match = re.search(r"(19|20)\d{2}\s*[-~>]+\s*(19|20)\d{2}", q)
-    qs, qe = (None, None)
-    if range_match:
-        qs, qe = parse_year_range(range_match.group())
-    year = parse_year(q)
-    if year and qs is None:
-        qs = qe = year
-
-    # Fuel type — normalized
-    detected_type = ""
-    if "petrol" in q or "gasoline" in q:
-        detected_type = "petrol"
-    elif "diesel" in q:
-        detected_type = "diesel"
-    elif "hybrid" in q or "phev" in q:
-        detected_type = "hybrid"
-
-    detected_type = normalize_engine_type(detected_type)
-
-    # Car type
-    car_type_match = re.search(
-        r"(sedan|hatchback|coupe|suv|cabriolet|convertible|tourer|wagon|estate)",
-        q
-    )
-    car_type = car_type_match.group() if car_type_match else ""
-
-    # Model = leftover
-    model = normalize(q)
-
+def parse_query(query: str):
+    parts = [p.strip() for p in query.split("|")]
+    while len(parts) < 6:
+        parts.append(None)
+    brand, model, type_name, engine_name, hp, fuel_type = parts
     return {
-        "brand": extract_brand_from_query(q),
+        "brand": normalize_brand(brand),
+        "model": normalize(model),
+        "type_name": normalize(type_name),
         "engine_name": normalize(engine_name),
-        "engine_type": normalize_engine_type(detected_type),
-        "year_start": qs,
-        "year_end": qe,
-        "hp": hp,
-        "model": model,
-        "car_type": normalize(car_type)
+        "hp": int(hp) if hp and hp.isdigit() else None,
+        "engine_type": normalize_engine_type(fuel_type)
     }
 
-def extract_brand_from_query(text):
-    for key, alias in BRAND_ALIASES.items():
-        if key in text:
-            return alias
-    return ""
+# -----------------------------------------------
+# STEP 1: BRAND FILTER
+# -----------------------------------------------
+
+def step1_brand_filter(query_tokens, engine_dicts):
+    filtered_entries = []
+
+    # Brands that must always use DB2
+    db2_only_brands = ["vw", "volkswagen", "aston martin", "bentley", "lamborghini"]
+
+    use_db2_only = query_tokens["brand"] in db2_only_brands
+
+    for idx, (data, db_weight) in enumerate(engine_dicts):
+        if use_db2_only and idx == 0:  # Skip DB1 if DB2 only brand
+            continue
+
+        for code, entry in data.items():
+            first_car = entry.get("cars", [{}])[0]
+            category = first_car.get("category", "")
+            entry_brand = normalize_brand(category.split()[0]) if category else ""
+
+            if query_tokens["brand"] and query_tokens["brand"] != entry_brand:
+                continue
+
+            filtered_entries.append((code, entry, db_weight))
+
+    return filtered_entries
 
 # -----------------------------------------------
-# SCORING
+# STEP 2: WEIGHTED FUZZY SEARCH
 # -----------------------------------------------
 
 def weighted_match_score(query, entry, weights):
@@ -206,49 +184,34 @@ def weighted_match_score(query, entry, weights):
     if model_scores:
         score += max(model_scores) * weights["model"]
 
-    # Fuel type match
-    score += fuzz.token_sort_ratio(query["engine_type"], entry["engine_type"]) * weights["engine_type"]
+    # Fuel type score
+    fuel_type_entry = entry.get("engine_type") or ""
+    score += fuzz.token_sort_ratio(query["engine_type"], fuel_type_entry) * weights["engine_type"]
 
-    # Car type match
-    score += fuzz.token_sort_ratio(query["car_type"], entry.get("car_type", "")) * weights["car_type"]
+    # Car type / chassis score
+    chassis_list = entry.get("chassis", [])
+    chassis_scores = [fuzz.token_sort_ratio(query["type_name"], c) for c in chassis_list]
+    if chassis_scores:
+        score += max(chassis_scores) * weights["car_type"]
 
-    # Year match
-    if match_year_range(query["year_start"], query["year_end"], entry["year"]):
+    # Engine name
+    score += fuzz.token_sort_ratio(query["engine_name"], entry.get("engine_name", "")) * weights["engine_name"]
+
+    # Year match (from tokens.year)
+    if match_year_range(None, None, entry.get("year", [])):
         score += 100 * weights["year"]
 
-    # Engine code match
-    score += fuzz.token_sort_ratio(query["engine_name"], entry["engine_name"]) * weights["engine_name"]
+    # HP score (if available)
+    hp_entry = entry.get("engine_info", {}).get("Horsepower (HP)")
+    if query["hp"] and hp_entry:
+        hp_score = max(0, 100 - abs(query["hp"] - int(hp_entry)))
+        score += hp_score * weights["hp"]
 
     return score
 
-# -----------------------------------------------
-# TWO-STEP SEARCH ENGINE
-# -----------------------------------------------
-
-def search_engine(query, engine_dicts, top_n=5):
-    query_tokens = extract_query_tokens(query)
-    brand = query_tokens["brand"]
-
-    # ---------------- Step 1: Brand Filter ----------------
-    filtered_entries = []
-    for data, db_weight in engine_dicts:
-        for code, entry in data.items():
-            entry_brand = entry["tokens"].get("brand", "")
-            if brand and entry_brand != brand:
-                continue
-            filtered_entries.append((code, entry, db_weight))
-
-    # If nothing matches brand → fallback to all
-    if not filtered_entries:
-        filtered_entries = [
-            (code, entry, db_weight)
-            for data, db_weight in engine_dicts
-            for code, entry in data.items()
-        ]
-
-    # ---------------- Step 2: Weighted Fuzzy Ranking ----------------
+def step2_fuzzy_search(query_tokens, candidate_entries, top_n=5):
     results = []
-    for code, entry, db_weight in filtered_entries:
+    for code, entry, db_weight in candidate_entries:
         s = weighted_match_score(query_tokens, entry["tokens"], SCORING_WEIGHTS)
         s *= db_weight
         results.append({
@@ -256,41 +219,54 @@ def search_engine(query, engine_dicts, top_n=5):
             "score": s,
             "description": entry["engine_info"]
         })
-
     results.sort(key=lambda x: x["score"], reverse=True)
     return results[:top_n]
+
+# -----------------------------------------------
+# FULL SEARCH
+# -----------------------------------------------
+
+def search_three_step(query, engine_dicts, top_n=5):
+    query_tokens = parse_query(query)
+    step1_candidates = step1_brand_filter(query_tokens, engine_dicts)
+    results = step2_fuzzy_search(query_tokens, step1_candidates, top_n)
+    return results
 
 # -----------------------------------------------
 # FASTAPI
 # -----------------------------------------------
 
 app = FastAPI()
-
 class QueryRequest(BaseModel):
     text: str
 
 engine_dicts = load_databases(DB_FILES)
 
-@app.post("/query")
-def query_endpoint(request: QueryRequest):
-    res = search_engine(request.text, engine_dicts, top_n=5)
+@app.post("/query_three_step")
+def query_three_step_endpoint(request: QueryRequest):
+    res = search_three_step(request.text, engine_dicts, top_n=5)
     return {"query": request.text, "results": res}
 
+# -----------------------------------------------
+# USAGE EXAMPLE
+# -----------------------------------------------
 
-if __name__ == "__main__":
-    engine_dicts = load_databases(DB_FILES)
-    print(f"Loaded {len(engine_dicts)} database files.")
-
-    while True:
-        q = input("\nEnter query: ").strip()
-        if not q:
-            continue
-
-        results = search_engine(q, engine_dicts)
-        for r in results:
-            print(f"{r['engine_code']} ({r['score']:.1f}%) → {r['description']}")
-        print("-" * 60)
+    # Run FastAPI server: uvicorn this_file:app --reload
 
 # if __name__ == "__main__":
-#     print("Loaded databases:", len(engine_dicts))
-#     uvicorn.run(app, host="127.0.0.1", port=8000)
+#     engine_dicts = load_databases(DB_FILES)
+#     print(f"Loaded {len(engine_dicts)} database files.")
+
+#     while True:
+#         q = input("\nEnter query: ").strip()
+#         if not q:
+#             continue
+
+#         results = search_three_step(q, engine_dicts, top_n=10)
+#         for r in results:
+#             print(f"{r['engine_code']} ({r['score']:.1f}%) → {r['description']}")
+#         print("-" * 60)
+
+if __name__ == "__main__":
+    print("Loaded databases:", len(engine_dicts))
+    uvicorn.run(app, host="172.20.1.146", port=8000)

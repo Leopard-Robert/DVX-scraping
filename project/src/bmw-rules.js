@@ -149,6 +149,20 @@ export function inferEngineFromModel(modelName, engineName, power) {
   return null;
 }
 
+
+export function parseYearRange(startYear, endYear, judgementYear) {
+  
+  if (endYear === 'now') {
+    endYear = new Date().getFullYear();
+  }
+  if (startYear === null) {
+    return endYear >= judgementYear;
+  }
+  if (startYear && endYear) {
+    return startYear >= judgementYear || endYear >= judgementYear;
+  }
+}
+
 /**
  * Check if a BMW platform code is affected by MG1/MD1
  */
@@ -214,6 +228,7 @@ export function generateECUUnlockInfo(required = true) {
 export default {
   extractEngineCode,
   inferEngineFromModel,
+  parseYearRange,
   isMG1Platform,
   requiresECUUnlock,
   generateECUUnlockInfo,

@@ -93,7 +93,7 @@ class DVXScraper {
     try {
       await this.page.goto(url, {
         waitUntil: "networkidle2",
-        timeout: 500000,
+        timeout: 30000,
       });
 
       await delay(waitTime);
@@ -194,7 +194,7 @@ class DVXScraper {
         const engineType = el.closest(".col-md-6")?.querySelector(typeSel);
         return {
           name: spans[spans.length - 2]?.textContent.trim() || "",
-          power: spans[spans.length - 1]?.textContent.trim().replace("PK", "HP") || "",
+          power: spans[spans.length - 1]?.textContent.trim().replace("PK", "") || "",
           url: el.href,
           type: typeMap[engineType?.textContent.trim()] || "",
         };
@@ -298,17 +298,21 @@ class DVXScraper {
   /** APPLY RULES */
   applyBMWRules(data, brand) {
     if (brand.toLowerCase() !== "bmw") return null;
-    return bmwRules.requiresECUUnlock(data)
-      ? bmwRules.generateECUUnlockInfo(true)
-      : null;
+    if (!bmwRules.parseYearRange(data.startYear, data.endYear, 2020)) return null;
+    return bmwRules.generateECUUnlockInfo(true);
+    // return bmwRules.requiresECUUnlock(data)
+    //   ? bmwRules.generateECUUnlockInfo(true)
+    //   : null;
   }
 
   applyAMGRules(data, brand) {
     if (brand.toLowerCase() !== "mercedes") return null;
     if (!amgRules.isAMGModel(data.modelName)) return null;
-    return amgRules.requiresCPCUpgrade(data)
-      ? amgRules.generateCPCUpgradeInfo(true)
-      : null;
+    if (!amgRules.parseYearRange(data.startYear, data.endYear, 2018)) return null;
+    return amgRules.generateCPCUpgradeInfo(true);
+    // return amgRules.requiresCPCUpgrade(data)
+    //   ? amgRules.generateCPCUpgradeInfo(true)
+    //   : null;
   }
 
   /** MAIN SCRAPE flow */
@@ -403,8 +407,8 @@ class DVXScraper {
                 modelName: model.name,
                 engineName: engine.name,
                 type: t.name,
-
-                year: amgRules.extractYearFromType(t.name),
+                startYear: engine.startYear,
+                endYear: engine.endYear,
               };
 
               const ecuUnlock = this.applyBMWRules(ruleData, brand.name);
