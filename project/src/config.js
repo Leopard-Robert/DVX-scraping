@@ -24,7 +24,7 @@ export const CONFIG = {
   
   // Puppeteer options
   puppeteer: {
-    headless: false, // Set to true for production
+    headless: true, // Set to true for production
     defaultViewport: {
       width: 1920,
       height: 1080
