@@ -186,7 +186,7 @@ class DVXScraper {
     return await this.page.evaluate((sel, typeSel) => {
       return [...document.querySelectorAll(sel)].map((el) => {
         const typeMap = {
-          "Diesel": "Diesel",
+          "Diesel": "diesel",
           "Benzine": "petrol",
           "Hybride": "hybrid"
         };
@@ -196,7 +196,7 @@ class DVXScraper {
           name: spans[spans.length - 2]?.textContent.trim() || "",
           power: spans[spans.length - 1]?.textContent.trim().replace("PK", "HP") || "",
           url: el.href,
-          type: engineType?.textContent.trim() || "",
+          type: typeMap[engineType?.textContent.trim()] || "",
         };
       });
     }, CONFIG.selectors.engines, CONFIG.selectors.engineType);
