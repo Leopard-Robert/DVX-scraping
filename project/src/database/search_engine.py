@@ -291,4 +291,4 @@ def query_three_step_endpoint(request: QueryRequest):
 
 if __name__ == "__main__":
     print("Loaded databases:", len(engine_dicts))
-    uvicorn.run(app, host="172.20.1.146", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
