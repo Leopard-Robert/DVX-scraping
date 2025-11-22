@@ -93,7 +93,7 @@ class DVXScraper {
     try {
       await this.page.goto(url, {
         waitUntil: "networkidle2",
-        timeout: 30000,
+        timeout: 500,
       });
 
       await delay(waitTime);
@@ -105,7 +105,7 @@ class DVXScraper {
   }
 
   /** Wait for selector with fallback */
-  async waitForSelector(selector, timeout = 8000) {
+  async waitForSelector(selector, timeout = 800) {
     try {
       await delay(200); // fallback small wait
       await this.page.waitForSelector(selector, { timeout });
