@@ -264,7 +264,7 @@ class QueryRequest(BaseModel):
 
 engine_dicts = load_databases(DB_FILES)
 
-@app.post("/query_three_step")
+@app.post("/query")
 def query_three_step_endpoint(request: QueryRequest):
     res = search_three_step(request.text, engine_dicts, top_n=5)
     return {"query": request.text, "results": res}
