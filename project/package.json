@@ -1,0 +1,32 @@
+{
+  "name": "supreme-tuning-dvx-scraper",
+  "version": "1.0.0",
+  "description": "DVX Performance scraper for Supreme Tuning platform",
+  "main": "src/scraper.js",
+  "type": "module",
+  "scripts": {
+    "scrape": "node src/scraper.js",
+    "demo": "node src/test.js",
+    "test": "node src/test-scraper.js",
+    "test:rules": "node src/test-scraper.js",
+    "clean": "rm -rf data/*.json"
+  },
+  "keywords": [
+    "scraper",
+    "puppeteer",
+    "automotive",
+    "tuning"
+  ],
+  "author": "Supreme Tuning",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "fs": "^0.0.1-security",
+    "https-proxy-agent": "^7.0.6",
+    "path": "^0.12.7",
+    "playwright": "^1.56.1",
+    "puppeteer": "^24.30.0",
+    "url": "^0.11.4"
+  }
+}

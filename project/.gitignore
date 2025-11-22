@@ -5,7 +5,7 @@ yarn.lock
 
 # Output data
 data/
-*.json
+# *.json
 
 # Logs
 logs/
