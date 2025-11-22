@@ -1,3 +1,25 @@
+import subprocess
+import sys
+
+# List of required modules
+required_modules = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "rapidfuzz"
+]
+
+# Install any missing modules
+for module in required_modules:
+    try:
+        __import__(module)
+    except ImportError:
+        print(f"Installing missing module: {module}")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", module])
+
+
+
+
 import json
 import re
 from rapidfuzz import fuzz
