@@ -37,7 +37,7 @@ export function extractPeriod() {
         const isContainYear = engine.typeName.match(/(\d{4})/);
         if (!isContainYear) {
             engine.startYear = null;
-            engine.endYear = "present";
+            engine.endYear = "now";
             continue;
         }
         const isContainPeriod = engine.typeName.match(/(\d{4}).*?(\d{4})/);
@@ -54,7 +54,7 @@ export function extractPeriod() {
         }
         
         engine.startYear = isContainYear[1];
-        engine.endYear = "present";
+        engine.endYear = "now";
     }
 }
 

@@ -13,7 +13,7 @@ DB_FILES = [
 
 DB_WEIGHTS = {
     "engine_data.json": 1.0,
-    "engine_codes.json": 0.75
+    "engine_codes.json": 0.7
 }
 
 # Brand aliases for query normalization
@@ -40,8 +40,8 @@ BRAND_ALIASES = {
 # You can adjust these to prioritize model/engine_type/car_type/year
 # ---------------------------
 SCORING_WEIGHTS = {
-    "model": 0.5,          # Highest priority
-    "engine_type": 0.2,
+    "model": 0.4,          # Highest priority
+    "engine_type": 0.15,
     "car_type": 0.15,      # New: type of the car
     "year": 0.15,
     "engine_name": 0.05

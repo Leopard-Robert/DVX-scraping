@@ -163,8 +163,8 @@ export function isMG1Platform(platformCode) {
 export function requiresECUUnlock(engineData) {
   const { engineCode, modelName, engineName, type, year, platformCode } = engineData;
   
-  // 1. Try to extract or infer engine code
-  let detectedCode = engineCode || extractEngineCode(engineName) || inferEngineFromModel(modelName, engineName);
+  // // 1. Try to extract or infer engine code
+  // let detectedCode = engineCode || extractEngineCode(engineName) || inferEngineFromModel(modelName, engineName);
   
   // 2. If we have an engine code, check the lock table
   if (detectedCode && MG1_MD1_ENGINES[detectedCode]) {

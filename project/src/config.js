@@ -8,17 +8,17 @@ export const CONFIG = {
   
   // Target brands to scrape
   targetBrands: [
-    'Audi',
-    'BMW',
+    // 'Audi',
+    // 'BMW',
     'Mercedes',
     'Volkswagen',
     'Porsche',
-    'Cupra',
+    // 'Cupra',
     'Skoda',
     'Seat',
     'Mini',
     'Lamborghini',
-    'Bentley',
+    // 'Bentley',
     'Aston Martin'
   ],
   
@@ -40,14 +40,14 @@ export const CONFIG = {
   
   // Wait times (in milliseconds)
   waitTimes: {
-    navigation: 500,
-    shortDelay: 500,
-    mediumDelay: 1000,
-    longDelay: 200
+    navigation: 1000,
+    shortDelay: 1000,
+    mediumDelay: 5000,
+    longDelay: 2000
   },
   
   // Output path
-  outputPath: './data/supreme-tuning-master.json',
+  outputPath: './data/step_1_data.json',
   
   // Selectors based on HTML analysis
   selectors: {
@@ -62,11 +62,14 @@ export const CONFIG = {
 
     // Engine page: .col-lg-6.col-md-12.col-sm-12.engine.hvr-grow
     engines: '.engine.hvr-grow a, .engine a',
+    engineType: '.engine-heading',
 
-    // Stage page elements
-    stageTable: 'table tr',
-    progressBars: '.progress-bar',
-    stageContent: '.stage-content, .tuning-content'
+    // Stage data scraper
+    engineName: ".pricing-table .value", // engine name on stage page
+    hpBars: "h2 + .improvement + .progress .progress-bar span", // HP bars
+    nmBars: "h2 + .improvement + .progress .progress-bar span", // Nm bars
+    oldPrice: ".old-price", // old price element
+    newPrice: ".new-price", // new price element
   }
 };
 

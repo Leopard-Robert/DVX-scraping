@@ -11,6 +11,8 @@ import CONFIG from "./config.js";
 import bmwRules from "./bmw-rules.js";
 import amgRules from "./amg-rules.js";
 
+import axios from "axios";
+
 // Puppeteer v24 removed page.waitForTimeout() → use this instead
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -63,12 +65,35 @@ class DVXScraper {
     console.log("✅ Browser initialized");
   }
 
+  /** Query Python FastAPI server for engine code */
+  async queryPythonEngine(queryText) {
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/query", {
+        text: queryText,
+      });
+      const results = response.data.results;
+      if (results && results.length > 0) {
+        // return top 1 result
+        return results[0];
+      }
+      return null;
+    } catch (err) {
+      console.error("❌ Error querying Python:", err.message);
+      return null;
+    }
+  }
+
+  /**NOMALIZE ENGINE TYPE */
+  async nomalizeString(str) {
+    return str.replace(/JUST ADDED!|DEVELOPMENT/gi, "").trim();
+  }
+
   /** Navigate safely */
   async navigateTo(url, waitTime = CONFIG.waitTimes.navigation) {
     try {
       await this.page.goto(url, {
         waitUntil: "networkidle2",
-        timeout: 30000,
+        timeout: 500000,
       });
 
       await delay(waitTime);
@@ -156,164 +181,115 @@ class DVXScraper {
     if (!await this.navigateTo(url)) return [];
     if (!await this.waitForSelector(CONFIG.selectors.engines)) return [];
 
-    return await this.page.evaluate((sel) => {
+
+
+    return await this.page.evaluate((sel, typeSel) => {
       return [...document.querySelectorAll(sel)].map((el) => {
+        const typeMap = {
+          "Diesel": "Diesel",
+          "Benzine": "petrol",
+          "Hybride": "hybrid"
+        };
         const spans = el.querySelectorAll("div span");
+        const engineType = el.closest(".col-md-6")?.querySelector(typeSel);
         return {
-          name: spans[0]?.textContent.trim() || "",
-          power: spans[1]?.textContent.trim() || "",
+          name: spans[spans.length - 2]?.textContent.trim() || "",
+          power: spans[spans.length - 1]?.textContent.trim().replace("PK", "HP") || "",
           url: el.href,
+          type: engineType?.textContent.trim() || "",
         };
       });
-    }, CONFIG.selectors.engines);
+    }, CONFIG.selectors.engines, CONFIG.selectors.engineType);
   }
 
   /** SCRAPE STAGE PAGE */
-async scrapeStageData(engineUrl, engineName) {
-  console.log(`        ⚙️ Scraping stages for ${engineName}...`);
+  async scrapeStageData(engineUrl, engineName, maxStage = null, fillMissingStages = false) {
+    console.log(`        ⚙️ Scraping stages for ${engineName}...`);
 
-  const extractStage = async (url, stageLabel) => {
-    if (!await this.navigateTo(url)) {
-      console.warn(`        ⚠️ Failed to load ${stageLabel} for ${engineName}`);
-      return null;
-    }
+    const extractStage = async (url, stageNumber) => {
+      if (!await this.navigateTo(url)) {
+        console.warn(`        ⚠️ Failed to load stage ${stageNumber} for ${engineName}`);
+        return null;
+      }
 
-    await delay(1000);
+      await delay(1000);
 
-    return await this.page.evaluate(() => {
-      const output = {};
+      return await this.page.evaluate((selectors) => {
+        const output = {};
 
-      /* -------------------------------
-        HP Extraction
-      --------------------------------*/
-      function extractHP() {
-        const hpBars = document.querySelectorAll(
-          "h2 + .improvement + .progress .progress-bar span"
-        );
-
+        // HP Extraction
+        const hpBars = document.querySelectorAll(selectors.hpBars);
         if (hpBars.length >= 2) {
-          const stockHpText = hpBars[0].innerText.replace("→", "").trim();
-          const tunedHpText = hpBars[1].innerText.trim();
-
-          const stockHp = parseInt(stockHpText.replace(/[^0-9]/g, ""));
-          const tunedHp = parseInt(tunedHpText.replace(/[^0-9]/g, ""));
-
-          return {
-            stockHp,
-            tunedHp,
-            hpGain: tunedHp - stockHp,
-          };
+          const stockHp = parseInt(hpBars[0].innerText.replace(/[^0-9]/g, ""));
+          const tunedHp = parseInt(hpBars[1].innerText.replace(/[^0-9]/g, ""));
+          output.hp = { stockHp, tunedHp, hpGain: tunedHp - stockHp };
         }
-        return null;
-      }
 
-      /* -------------------------------
-        Nm Extraction
-      --------------------------------*/
-      function extractNm() {
-        const nmBars = document.querySelectorAll(
-          "h2 + .improvement + .progress .progress-bar span"
-        );
-
+        // Nm Extraction
+        const nmBars = document.querySelectorAll(selectors.nmBars);
         if (nmBars.length >= 4) {
-          const stockNmText = nmBars[2].innerText.replace("→", "").trim();
-          const tunedNmText = nmBars[3].innerText.trim();
-
-          const stockNm = parseInt(stockNmText.replace(/[^0-9]/g, ""));
-          const tunedNm = parseInt(tunedNmText.replace(/[^0-9]/g, ""));
-
-          return {
-            stockNm,
-            tunedNm,
-            nmGain: tunedNm - stockNm,
-          };
+          const stockNm = parseInt(nmBars[2].innerText.replace(/[^0-9]/g, ""));
+          const tunedNm = parseInt(nmBars[3].innerText.replace(/[^0-9]/g, ""));
+          output.nm = { stockNm, tunedNm, nmGain: tunedNm - stockNm };
         }
-        return null;
-      }
 
-      /* -------------------------------
-        Price Extraction
-      --------------------------------*/
-      function extractPrice() {
-        const oldPrice = document.querySelector(".old-price");
-        const newPrice = document.querySelector(".new-price");
-
-        return {
-          oldPrice: oldPrice ? oldPrice.innerText.trim() : null,
-          newPrice: newPrice ? newPrice.innerText.trim() : null,
+        // Price Extraction
+        const oldPriceEl = document.querySelector(selectors.oldPrice);
+        const newPriceEl = document.querySelector(selectors.newPrice);
+        output.price = {
+          oldPrice: oldPriceEl?.innerText.trim() || null,
+          newPrice: newPriceEl?.innerText.trim() || null,
         };
+
+        // Engine name
+        const engineNameEl = document.querySelector(selectors.engineName);
+        output.engineName = engineNameEl?.innerText.trim() || null;
+
+        return output;
+      }, CONFIG.selectors);
+    };
+
+    const stages = [];
+    let stageNumber = 1;
+    let lastValidStage = null;
+
+    while (true) {
+      if (maxStage && stageNumber > maxStage) break;
+
+      // Construct stage URL dynamically
+      let stageUrl = engineUrl.replace(/\/\d+\/?$/, `/${stageNumber}`);
+      const stageData = await extractStage(stageUrl, stageNumber);
+
+      if (!stageData || (!stageData.hp && !stageData.nm && !stageData.price)) {
+        if (fillMissingStages && lastValidStage) {
+          // Copy last valid stage
+          stages.push({ ...lastValidStage, copiedFromStage: stageNumber - 1 });
+        } else {
+          break; // stop scraping
+        }
+      } else {
+        stages.push(stageData);
+        lastValidStage = stageData;
       }
 
-      /* -------------------------------
-        Engine Name
-      --------------------------------*/
-      const engineNameEl = document.querySelector(".pricing-table .value");
-
-      output.engineName = engineNameEl?.innerText.trim() || null;
-      output.hp = extractHP();
-      output.nm = extractNm();
-      output.price = extractPrice();
-
-      return output;
-    });
-  };
-
-  /* ---------------------------------------
-    EXTRACT STAGE 1
-  ----------------------------------------*/
-  const stage1 = await extractStage(engineUrl, "stage 1");
-
-  /* ---------------------------------------
-    CONSTRUCT STAGE 2 URL
-    Replace last /1 with /2
-  ----------------------------------------*/
-  let stage2Url = null;
-
-  if (/\/1$/.test(engineUrl)) {
-    stage2Url = engineUrl.replace(/\/1$/, "/2");
-  }
-
-  // Some URLs end with /1/ (trailing slash)
-  if (/\/1\/$/.test(engineUrl)) {
-    stage2Url = engineUrl.replace(/\/1\/$/, "/2/");
-  }
-
-  /* ---------------------------------------
-    EXTRACT STAGE 2 (optional)
-  ----------------------------------------*/
-  let stage2 = null;
-  if (stage2Url) {
-    stage2 = await extractStage(stage2Url, "stage 2");
-
-    // If stage2 fails to load, set as null
-    if (!stage2 || !stage2.hp) {
-      stage2 = null;
+      stageNumber++;
     }
+
+    console.log(`        📊 Extracted ${stages.length} stage(s) for ${engineName}`);
+    return stages;
   }
 
-  /* ---------------------------------------
-    RETURN RESULT
-  ----------------------------------------*/
-  const result = {
-    stage1,
-    stage2,
-  };
-
-  console.log("        📊 Extracted stage data:", result);
-  return result;
-}
-
-  /** Generate Stage1+, Stage2+ */
-  generatePlusStages(stage1, stage2) {
+  /** Generate Stage1+, Stage2+ ...*/
+  generatePlusStages(stageData) {
     const result = [];
 
-    if (stage1?.hp) {
-      result.push({ stageName: "Stage 1", ...stage1 });
-      result.push({ stageName: "Stage 1+", ...stage1 });
-    }
-    if (stage2?.hp) {
-      result.push({ stageName: "Stage 2", ...stage2 });
-      result.push({ stageName: "Stage 2+", ...stage2 });
+    if (!stageData || stageData.length === 0) return result;
+
+    for (const stage of stageData) {
+      if (stage?.hp) {
+        result.push({ stageName: `Stage ${stageData.indexOf(stage) + 1}`, ...stage });
+        result.push({ stageName: `Stage ${stageData.indexOf(stage) + 1}+`, ...stage });
+      }
     }
 
     return result;
@@ -329,6 +305,7 @@ async scrapeStageData(engineUrl, engineName) {
 
   applyAMGRules(data, brand) {
     if (brand.toLowerCase() !== "mercedes") return null;
+    if (!amgRules.isAMGModel(data.modelName)) return null;
     return amgRules.requiresCPCUpgrade(data)
       ? amgRules.generateCPCUpgradeInfo(true)
       : null;
@@ -364,44 +341,82 @@ async scrapeStageData(engineUrl, engineName) {
               brandId: brand.id,
               brandName: brand.name,
               modelName: model.name,
-              typeName: t.name,
+              name: t.name,
             };
             this.data.types.push(type);
 
             const engines = await this.scrapeEngines(t.url, t.name);
 
             for (const e of engines) {
+
               const engine = {
                 id: this.counters.engineId++,
-                typeName: type.typeName,
+                typeId: type.id,
                 modelId: model.id,
-                code:
-                  bmwRules.extractEngineCode(e.name) ||
-                  amgRules.extractAMGEngineCode(e.name) ||
-                  "UNKNOWN",
-                name: `${e.name} ${e.power}`.trim(),
+                code: null,
+                name: `${e.name}`.trim(),
+                startYear: null,
+                endYear: null,
+                type: e.type
               };
+
+              // --- Python integration ---
+              const queryText = `${brand.name} | ${model.name} | ${type.name} | ${engine.name} | ${e.power} | ${e.type}`;
+              console.log(queryText);
+              const topPythonResult = await this.queryPythonEngine(queryText);
+
+              if (topPythonResult) {
+                engine.code = topPythonResult.engine_code;
+              }
+
+              // engine.name = await this.nomalizeString(engine.name);
+
+              // Match period formats: "YYYY - YYYY", "YYYY->YYYY", or single year "YYYY"
+              const fullPeriodMatch = type.name.match(/(\d{4}).*?(\d{4})/); // e.g., 2010-2015
+              const endYearMatch = type.name.match(/->\s*(\d{4})/);           // e.g., -> 2022
+              const singleYearMatch = type.name.match(/(\d{4})/);             // any single year
+
+              if (fullPeriodMatch) {
+                engine.startYear = fullPeriodMatch[1];
+                engine.endYear = fullPeriodMatch[2];
+              } else if (endYearMatch) {
+                engine.startYear = null;
+                engine.endYear = endYearMatch[1];
+              } else if (singleYearMatch) {
+                engine.startYear = singleYearMatch[1];
+                engine.endYear = "now";
+              } else {
+                engine.startYear = null;
+                engine.endYear = "now";
+              }
 
               this.data.engines.push(engine);
 
-              const stageData = await this.scrapeStageData(e.url, engine.name);
+              const stageData = await this.scrapeStageData(e.url, engine.name, 2);
+
               // if (!stageData || !stageData.stock) continue;
 
-              const plusStages = this.generatePlusStages(
-                stageData.stage1,
-                stageData.stage2
-              );
+              const plusStages = this.generatePlusStages(stageData);
 
               const ruleData = {
                 engineCode: engine.code,
                 modelName: model.name,
                 engineName: engine.name,
                 type: t.name,
+
                 year: amgRules.extractYearFromType(t.name),
               };
 
-              // const ecuUnlock = this.applyBMWRules(ruleData, brand.name);
-              // const cpcUpgrade = this.applyAMGRules(ruleData, brand.name);
+              const ecuUnlock = this.applyBMWRules(ruleData, brand.name);
+              const cpcUpgrade = this.applyAMGRules(ruleData, brand.name);
+
+              console.log(`        Engine: ${engine.code} `);
+
+              console.log(ecuUnlock ? "     🔒 ECU Unlock required" : "   🔓ECU Unlock not required");
+              console.log(cpcUpgrade ? "     🚗 CPC Upgrade required" : "   🚗CPC Upgrade not required");
+
+              console.log(ecuUnlock);
+              console.log(cpcUpgrade);
 
               for (const s of plusStages) {
                 this.data.stages.push({
@@ -428,7 +443,6 @@ async scrapeStageData(engineUrl, engineName) {
               }
             }
             await this.save(); // Save after each engine
-            console.log(this.data);
           }
         }
       }
@@ -442,6 +456,8 @@ async scrapeStageData(engineUrl, engineName) {
       if (this.browser) await this.browser.close();
     }
   }
+
+
 
   /** SAVE TO JSON */
 

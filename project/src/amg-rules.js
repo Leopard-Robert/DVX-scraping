@@ -117,24 +117,12 @@ export function extractYearFromType(typeString) {
  */
 export function requiresCPCUpgrade(engineData) {
   const { engineCode, modelName, engineName, type, year } = engineData;
-  
-  // 1. Try to extract engine code
-  let detectedEngine = engineCode || extractAMGEngineCode(engineName) || inferAMGEngine(modelName, engineName);
-  
-  if (!detectedEngine) {
+
+  // 1. Check if it's M177 or M178
+  if (!engineCode.includes('M 177')  && !engineCode.includes('M 178')) {
     return false;
   }
   
-  // 2. Check if it's M177 or M178
-  if (detectedEngine !== 'M177' && detectedEngine !== 'M178') {
-    return false;
-  }
-  
-  // 3. Check year requirement
-  const engineInfo = AMG_V8_ENGINES[detectedEngine];
-  if (!engineInfo) {
-    return false;
-  }
   
   // Try to get year from multiple sources
   let productionYear = year;
@@ -144,7 +132,8 @@ export function requiresCPCUpgrade(engineData) {
   
   // If we have a year, check if it's >= 2018
   if (productionYear) {
-    return productionYear >= engineInfo.cpcRequiredFrom;
+    // return productionYear >= engineInfo.cpcRequiredFrom;
+    return productionYear >= 2018;
   }
   
   // Conservative approach: if we detected M177/M178 but no year, assume CPC required
@@ -185,3 +174,12 @@ export default {
   AMG_MODEL_PATTERNS
 };
 
+
+
+console.log(requiresCPCUpgrade({
+  engineCode: 'M 178',
+  modelName: 'AMG GT 4-door Coupé',
+  engineName: '43 AMG 367 PK',
+  type: "2018 ->...",
+  year: 2019
+}))
